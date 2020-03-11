@@ -5,8 +5,12 @@
 //           process.stdout.write('\nprompt > ');
 //         });
 
-        const pwd = (data) => {
-          return process.stdout.write(process.cwd())
-        }
+  // const pwd = (data) => {
+  //   return process.stdout.write(process.cwd())
+  // }
 
-        module.exports = pwd;
+  // module.exports = pwd;
+
+  module.exports = (done) => {
+    done(process.cwd())
+  }

@@ -1,11 +1,12 @@
-const fs = require('fs');
+const fs = require('fs')
 
-fs.readdirSync('./', 'utf8', (err, files) => {
-          if (err) {
-                    throw err
-          } else {
-                    process.stdout.write(files.join('\n'))
-                    process.stdout.write("prompt > ");
-          }
-})
+module.exports = (done) => {
+  fs.readdir('./', 'utf8', (err, data) => {
+    if (err) {
+      done(err.stack)
+    } else {
+      done(data.join('\n'))
+    }
+  })
+}
 

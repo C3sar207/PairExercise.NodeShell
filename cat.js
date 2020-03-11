@@ -1,13 +1,11 @@
-const pwd = require('./pwd');
-const fs = require('fs');
+const fs = require('fs')
 
-function cat (commandAndFilename) { //[cat, bash.js]
-          const pwdFunc = pwd();
-          console.log(pwdFunc);
-          fs.readFile(pwdFunc, (err, data) => {
-                    if (err) throw err;
-                    console.log(data);
-                  })
+module.exports = (fileName, done) => {
+  fs.readFile(fileName, 'utf8', (err, data) => {
+    if (err) {
+      done(err.stack)
+    } else {
+      done(data)
+    }
+  })
 }
-cat();
-module.exports = cat;

@@ -1,13 +1,28 @@
-const pwd = require('./pwd');
-const cat = require('./cat');
+const prompt = (data) => {
+  console.log(data)
+  process.stdout.write('> ')
+}
 
-process.stdout.write('prompt > ');
+const main = (data) => {
+  const entry = data.toString().trim()
+  const [command, arg] = entry.split(' ')
+  switch (command) {
+    case 'pwd':
+      require('./pwd')(prompt)
+      break
+    case 'ls':
+      require('./ls')(prompt)
+      break
+    case 'cat':
+      require('./cat')(arg, prompt)
+      break
+    case 'curl':
+      require('./curl')(arg, prompt)
+      break
+    default:
+      prompt('not found')
+  }
+}
 
-// module.exports = process.stdin.on('data', (data) => {
-//   // const cmd = data.toString().trim();
-//   console.log('hi')
-//   process.stdout.write(process.cwd());
-//   process.stdout.write('\nprompt > ');
-// });
-
-pwd()
+prompt('Welcome to Node Shell!')
+process.stdin.on('data', main)
